@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.bravokorea'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Tess4J: Tesseract OCR Engine Wrapper
+    implementation 'net.sourceforge.tess4j:tess4j:5.9.0'
+    
+    // Logging (Tess4J 의존성 충돌 방지 및 로깅 표준화)
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    
+    // Lombok (Boilerplate reduction)
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'com.bravokorea.ocr.App'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
